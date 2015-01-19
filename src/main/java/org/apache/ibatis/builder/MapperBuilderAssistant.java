@@ -113,6 +113,11 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
   }
 
+    /**
+     * 根据sql映射文件中的<cache>元素，创建二级缓存对象。<br>
+     * 一个NameSpace只有一个二级缓存。
+     * @return
+     */
   public Cache useNewCache(Class<? extends Cache> typeClass,
       Class<? extends Cache> evictionClass,
       Long flushInterval,

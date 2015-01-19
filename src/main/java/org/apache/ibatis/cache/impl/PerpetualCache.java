@@ -23,7 +23,8 @@ import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheException;
 
 /**
- * jfq, 这是Session缓存的实现类
+ * jfq, 二级缓存和Session缓存的最终实现类。<br>
+ * 其实就是一个HashMap<br>
  * @author Clinton Begin
  */
 public class PerpetualCache implements Cache {

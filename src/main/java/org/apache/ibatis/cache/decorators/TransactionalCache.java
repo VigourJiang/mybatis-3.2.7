@@ -22,11 +22,16 @@ import java.util.concurrent.locks.ReadWriteLock;
 import org.apache.ibatis.cache.Cache;
 
 /**
+ * jfq, 支持commit和rollback操作的cache。
+ * 封装了一个delegate Cache对象，在commit之前，对cache做的任何修改都不会反映到delegate中。
  * @author Clinton Begin
  */
 public class TransactionalCache implements Cache {
 
   private Cache delegate;
+  /**
+   * jfq, 当有当clear()方法被调用的时候，clearOnCommit才会被设置为true
+   */
   private boolean clearOnCommit;
   private Map<Object, AddEntry> entriesToAddOnCommit;
   private Map<Object, RemoveEntry> entriesToRemoveOnCommit;

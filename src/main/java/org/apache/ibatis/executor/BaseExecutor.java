@@ -53,6 +53,9 @@ public abstract class BaseExecutor implements Executor {
   protected Executor wrapper;
 
   protected ConcurrentLinkedQueue<DeferredLoad> deferredLoads;
+  /**
+   * Session缓存
+   */
   protected PerpetualCache localCache;
   protected PerpetualCache localOutputParameterCache;
   protected Configuration configuration;
@@ -63,6 +66,7 @@ public abstract class BaseExecutor implements Executor {
   protected BaseExecutor(Configuration configuration, Transaction transaction) {
     this.transaction = transaction;
     this.deferredLoads = new ConcurrentLinkedQueue<DeferredLoad>();
+    // 从这段代码可以看到，Session缓存是无法关闭的。
     this.localCache = new PerpetualCache("LocalCache");
     this.localOutputParameterCache = new PerpetualCache("LocalOutputParameterCache");
     this.closed = false;
@@ -127,6 +131,7 @@ public abstract class BaseExecutor implements Executor {
     if (queryStack == 0 && ms.isFlushCacheRequired()) {
       clearLocalCache();
     }
+    // jfq, 这里用了queryStack变量。看样子，当前函数有可能会被递归调用
     List<E> list;
     try {
       queryStack++;
@@ -161,6 +166,14 @@ public abstract class BaseExecutor implements Executor {
     }
   }
 
+  /**
+   * 计算cache中的key。参与计算的字段包括：Statement的ID、offset、limit、sql语句本身、非OUT类型的参数的值等。
+   * @param ms
+   * @param parameterObject
+   * @param rowBounds
+   * @param boundSql
+   * @return
+   */
   public CacheKey createCacheKey(MappedStatement ms, Object parameterObject, RowBounds rowBounds, BoundSql boundSql) {
     if (closed) throw new ExecutorException("Executor was closed.");
     CacheKey cacheKey = new CacheKey();

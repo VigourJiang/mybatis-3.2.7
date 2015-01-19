@@ -21,10 +21,15 @@ import java.util.Map;
 import org.apache.ibatis.cache.decorators.TransactionalCache;
 
 /**
+ * jfq,维护TransactionalCache的delegate对象和TransactionalCache对象的映射关系。
  * @author Clinton Begin
  */
 public class TransactionalCacheManager {
 
+  /**
+   * TransactionalCache会包含一个delegate Cache。<br>
+   * 这个属性维护的就是delegate对象和TransactionalCache之间的映射关系。
+   */
   private Map<Cache, TransactionalCache> transactionalCaches = new HashMap<Cache, TransactionalCache>();
 
   public void clear(Cache cache) {

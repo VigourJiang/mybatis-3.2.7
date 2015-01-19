@@ -196,6 +196,12 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
   }
 
+  /**
+   * jfq, 对应sql映射文件中的<cache>元素。开启二级缓存。<br>
+   * 这里所说的二级缓存其实是一个namespace有一个缓存对象。
+   * @param context
+   * @throws Exception
+   */
   private void cacheElement(XNode context) throws Exception {
     if (context != null) {
       String type = context.getStringAttribute("type", "PERPETUAL");

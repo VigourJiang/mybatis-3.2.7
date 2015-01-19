@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * jfq, 缓存中的作为key的对象。
  * @author Clinton Begin
  */
 public class CacheKey implements Cloneable, Serializable {

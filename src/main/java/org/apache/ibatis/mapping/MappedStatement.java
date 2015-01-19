@@ -41,6 +41,9 @@ public final class MappedStatement {
   private StatementType statementType;
   private ResultSetType resultSetType;
   private SqlSource sqlSource;
+  /**
+   * 整个NameSpace的Cache对象。也就是文档中的二级缓存对象。
+   */
   private Cache cache;
   private ParameterMap parameterMap;
   private List<ResultMap> resultMaps;

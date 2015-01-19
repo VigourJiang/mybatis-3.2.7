@@ -16,6 +16,8 @@
 package org.apache.ibatis.executor;
 
 /**
+ * jfq, 利用ThreadLocal和store/recall函数，实现了简单的事件记录类。
+ * 支持事件上下文的覆盖和恢复。
  * @author Clinton Begin
  */
 public class ErrorContext {
