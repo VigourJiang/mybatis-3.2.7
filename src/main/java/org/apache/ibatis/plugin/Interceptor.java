@@ -18,6 +18,7 @@ package org.apache.ibatis.plugin;
 import java.util.Properties;
 
 /**
+ * jfq, 与plugins相关
  * @author Clinton Begin
  */
 public interface Interceptor {

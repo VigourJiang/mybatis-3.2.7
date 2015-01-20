@@ -72,4 +72,28 @@ public class BoundSql {
   public Object getAdditionalParameter(String name) {
     return metaParameters.getValue(name);
   }
+
+
+  /**
+   * jfq, 调试方便
+   * @return
+   */
+  public String toString(){
+      StringBuilder sb = new StringBuilder(1000);
+      sb.append("BoundSql:\n");
+      sb.append("Sql:[\n").append(sql).append("\n]\n");
+
+      sb.append("Parameter Mapping:[");
+      for(ParameterMapping mapping: parameterMappings){
+          sb.append(mapping.toString()).append("\n");
+      }
+      sb.append("]\n");
+
+      sb.append("Additional Parameters:[");
+      for(String key: additionalParameters.keySet()){
+          sb.append("key").append(":").append(additionalParameters.get(key)).append(";");
+      }
+      sb.append("]\n");
+      return sb.toString();
+  }
 }

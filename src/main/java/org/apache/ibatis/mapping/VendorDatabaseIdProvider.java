@@ -28,6 +28,7 @@ import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 
 /**
+ * jfq, 从Connection对象查找数据库的名字，然后根据properties字段所指定的映射关系，返回数据库ID
  * Vendor DatabaseId provider
  * 
  * It returns database product name as a databaseId
@@ -42,6 +43,9 @@ public class VendorDatabaseIdProvider implements DatabaseIdProvider {
   
   private static final Log log = LogFactory.getLog(BaseExecutor.class);
 
+  /**
+   * DatabaseName -> DatabaseId
+   */
   private Properties properties;
   
   public String getDatabaseId(DataSource dataSource) {

@@ -29,12 +29,18 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 /**
+ * jfq, 在构造函数中会创建一个delegate，以后所有的操作都委托给delegate完成。
  * @author Clinton Begin
  */
 public class RoutingStatementHandler implements StatementHandler {
 
   private final StatementHandler delegate;
 
+  /**
+   * 创建自身的同时，创建一个delegate。
+   * 创建规则：根据MappedStatement.getStatementType的返回值，分别创建SimpleStatementHandler、
+   * PreparedStatementHandler或者CallableStatementHandler。
+   */
   public RoutingStatementHandler(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
 
     switch (ms.getStatementType()) {

@@ -127,6 +127,10 @@ public class CacheBuilder {
     }
   }
 
+  /**
+   * jfq, 通过反射，设置cache对象的属性
+   * @param cache
+   */
   private void setCacheProperties(Cache cache) {
     if (properties != null) {
       MetaObject metaCache = SystemMetaObject.forObject(cache);

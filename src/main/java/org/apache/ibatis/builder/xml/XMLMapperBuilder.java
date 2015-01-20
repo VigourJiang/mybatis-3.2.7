@@ -48,6 +48,7 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
 /**
+ * jfq, 解析SQL Mapper的XML文件
  * @author Clinton Begin
  */
 public class XMLMapperBuilder extends BaseBuilder {
@@ -216,6 +217,11 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
   }
 
+  /**
+   * jfq, 根据mybatis文档，3.2.7中，parameterMap元素已经是deprecated状态了。
+   * @param list
+   * @throws Exception
+   */
   private void parameterMapElement(List<XNode> list) throws Exception {
     for (XNode parameterMapNode : list) {
       String id = parameterMapNode.getStringAttribute("id");

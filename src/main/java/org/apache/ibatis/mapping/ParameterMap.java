@@ -21,6 +21,7 @@ import java.util.List;
 import org.apache.ibatis.session.Configuration;
 
 /**
+ * jfq, 对应已经处于deprecated状态的parameterMap元素
  * @author Clinton Begin
  */
 public class ParameterMap {

@@ -23,7 +23,7 @@
     <version>21</version>
   </parent>
 
-  <artifactId>mybatis</artifactId>
+  <artifactId>mybatis-jfq</artifactId>
   <version>3.2.7</version>
   <packaging>jar</packaging>
 

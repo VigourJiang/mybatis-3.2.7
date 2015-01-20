@@ -49,6 +49,9 @@ public class XMLConfigBuilder extends BaseBuilder {
 
   private boolean parsed;
   private XPathParser parser;
+  /**
+   * jfq, 默认的environment
+   */
   private String environment;
 
   public XMLConfigBuilder(Reader reader) {
@@ -84,6 +87,10 @@ public class XMLConfigBuilder extends BaseBuilder {
     this.parser = parser;
   }
 
+  /**
+   * jfq, 此处是解析ConfigurationXML的入口函数
+   * @return
+   */
   public Configuration parse() {
     if (parsed) {
       throw new BuilderException("Each XMLConfigBuilder can only be used once.");
@@ -93,17 +100,23 @@ public class XMLConfigBuilder extends BaseBuilder {
     return configuration;
   }
 
+  /**
+   * jfq, 这个函数，依次解析Configuration XML的根节点，见官方文档。
+   * @param root
+   */
   private void parseConfiguration(XNode root) {
     try {
       propertiesElement(root.evalNode("properties")); //issue #117 read properties first
       typeAliasesElement(root.evalNode("typeAliases"));
       pluginElement(root.evalNode("plugins"));
       objectFactoryElement(root.evalNode("objectFactory"));
+      // jfq，这个节点在文档中没有出现过
       objectWrapperFactoryElement(root.evalNode("objectWrapperFactory"));
       settingsElement(root.evalNode("settings"));
       environmentsElement(root.evalNode("environments")); // read it after objectFactory and objectWrapperFactory issue #631
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
       typeHandlerElement(root.evalNode("typeHandlers"));
+      // jfq，这里开始解析mapper XML元素。
       mapperElement(root.evalNode("mappers"));
     } catch (Exception e) {
       throw new BuilderException("Error parsing SQL Mapper Configuration. Cause: " + e, e);
